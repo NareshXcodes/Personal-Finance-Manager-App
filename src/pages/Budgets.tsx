@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Plus, ArrowRight, TrendingUp, Pencil, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { Budget, BudgetSummary } from '@/types';
-import { budgetApi } from '@/api';
+import { budgetApi, expenseApi } from '@/api';
 import { formatCurrency } from '@/utils/format';
 import CategoryBadge from '@/components/CategoryBadge';
 import BudgetProgressBar from '@/components/BudgetProgressBar';
@@ -26,21 +26,36 @@ export default function Budgets() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const budList = await budgetApi.getAll();
+      const [budList, allExpenses] = await Promise.all([
+        budgetApi.getAll(),
+        expenseApi.getAll()
+      ]);
       setBudgets(budList);
-      setLoading(false);
 
+      // Calculate summaries dynamically instead of relying on stale backend data
       const sumMap: Record<number, BudgetSummary> = {};
-      await Promise.all(
-        budList.map(async (b) => {
-          try {
-            sumMap[b.id] = await budgetApi.getSummary(b.id);
-          } catch { /* summary might not exist */ }
-        })
-      );
+      const now = new Date();
+      budList.forEach((b) => {
+        const budgetExpenses = allExpenses.filter(e => 
+          e.budget_id === b.id && 
+          new Date(e.created_at).getMonth() === now.getMonth() &&
+          new Date(e.created_at).getFullYear() === now.getFullYear()
+        );
+        const total_spent = budgetExpenses.reduce((sum, e) => sum + e.amount, 0);
+        const percent_used = b.monthly_limit > 0 ? (total_spent / b.monthly_limit) * 100 : 0;
+        sumMap[b.id] = {
+          budget_name: b.name,
+          category: b.category,
+          total_spent,
+          percent_used,
+          remaining: b.monthly_limit - total_spent,
+          monthly_limit: b.monthly_limit
+        };
+      });
       setSummaries(sumMap);
     } catch {
       toast.error('Failed to load budgets');
+    } finally {
       setLoading(false);
     }
   }, []);

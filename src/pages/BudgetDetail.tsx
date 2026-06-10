@@ -38,16 +38,30 @@ export default function BudgetDetail() {
     async function fetch() {
       setLoading(true);
       try {
-        const [b, s, e, all] = await Promise.all([
+        const [b, e, all] = await Promise.all([
           budgetApi.getById(budgetId),
-          budgetApi.getSummary(budgetId),
           budgetApi.getExpenses(budgetId),
           budgetApi.getAll(),
         ]);
         setBudget(b);
-        setSummary(s);
         setExpenses(e);
         setAllBudgets(all);
+        
+        // Calculate summary dynamically to ensure it's always up-to-date
+        const now = new Date();
+        const currentMonthExpenses = e.filter((exp) => {
+          const d = new Date(exp.created_at);
+          return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        });
+        const totalSpent = currentMonthExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+        setSummary({
+          budget_name: b.name,
+          category: b.category,
+          total_spent: totalSpent,
+          monthly_limit: b.monthly_limit,
+          remaining: b.monthly_limit - totalSpent,
+          percent_used: b.monthly_limit > 0 ? (totalSpent / b.monthly_limit) * 100 : 0,
+        });
       } catch {
         toast.error('Failed to load budget');
         navigate('/budgets');
@@ -60,14 +74,28 @@ export default function BudgetDetail() {
 
   const refreshData = async () => {
     try {
-      const [b, s, e] = await Promise.all([
+      const [b, e] = await Promise.all([
         budgetApi.getById(budgetId),
-        budgetApi.getSummary(budgetId),
         budgetApi.getExpenses(budgetId),
       ]);
       setBudget(b);
-      setSummary(s);
       setExpenses(e);
+
+      // Calculate summary dynamically
+      const now = new Date();
+      const currentMonthExpenses = e.filter((exp) => {
+        const d = new Date(exp.created_at);
+        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+      });
+      const totalSpent = currentMonthExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+      setSummary({
+        budget_name: b.name,
+        category: b.category,
+        total_spent: totalSpent,
+        monthly_limit: b.monthly_limit,
+        remaining: b.monthly_limit - totalSpent,
+        percent_used: b.monthly_limit > 0 ? (totalSpent / b.monthly_limit) * 100 : 0,
+      });
     } catch { /* silent */ }
   };
 
