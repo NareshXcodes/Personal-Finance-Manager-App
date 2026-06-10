@@ -135,13 +135,13 @@ export default function Budgets() {
                 className={`animate-slide-up stagger-${Math.min(i + 1, 6)} group cursor-pointer rounded-2xl border border-warm-border bg-white p-5 md:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/20 relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-brand/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3 group-hover:bg-brand/10 transition-all" />
-                <div className="relative">
+                <div className="relative z-10">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="font-bold text-dark text-lg">{budget.name}</h3>
                       <div className="mt-1"><CategoryBadge category={budget.category} size="sm" /></div>
                     </div>
-                    <div className="flex gap-0.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-0.5 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={(e) => handleEdit(e, budget)}
                         className="p-1.5 rounded-lg hover:bg-brand/10 text-brand transition-colors"
