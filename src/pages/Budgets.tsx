@@ -141,7 +141,7 @@ export default function Budgets() {
                       <h3 className="font-bold text-dark text-lg">{budget.name}</h3>
                       <div className="mt-1"><CategoryBadge category={budget.category} size="sm" /></div>
                     </div>
-                    <div className="flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-0.5 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={(e) => handleEdit(e, budget)}
                         className="p-1.5 rounded-lg hover:bg-brand/10 text-brand transition-colors"
