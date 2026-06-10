@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, PiggyBank, BarChart3 } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, PiggyBank, BarChart3, LogOut } from 'lucide-react';
 import Logo from '@/components/shared-assets/Logo';
 
 const links = [
@@ -9,6 +9,13 @@ const links = [
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
     <>
       {/* Top Header */}
@@ -41,6 +48,14 @@ export default function Navbar() {
                   {label}
                 </NavLink>
               ))}
+              <div className="w-px h-6 bg-white/10 mx-2" />
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white/50 hover:text-danger hover:bg-danger/10 transition-all duration-200"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </button>
             </div>
           </div>
         </div>
@@ -66,6 +81,13 @@ export default function Navbar() {
               <span className="text-[10px] font-semibold tracking-wide">{label}</span>
             </NavLink>
           ))}
+          <button
+            onClick={handleLogout}
+            className="flex flex-col items-center justify-center gap-1 w-full py-2 rounded-xl text-white/50 hover:text-danger hover:bg-danger/10 transition-all duration-200"
+          >
+            <LogOut className="h-5 w-5" />
+            <span className="text-[10px] font-semibold tracking-wide">Logout</span>
+          </button>
         </div>
       </div>
     </>

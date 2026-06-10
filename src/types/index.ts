@@ -1,3 +1,8 @@
+export interface User {
+  id: number;
+  email: string;
+}
+
 export type Category = 'food' | 'transport' | 'utilities' | 'entertainment' | 'health' | 'education' | 'shopping';
 
 export interface Budget {

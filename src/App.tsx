@@ -6,6 +6,8 @@ import Budgets from '@/pages/Budgets';
 import BudgetDetail from '@/pages/BudgetDetail';
 import Reports from '@/pages/Reports';
 import Landing from '@/pages/Landing';
+import Login from '@/pages/Login';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function App() {
   return (
@@ -13,14 +15,18 @@ export default function App() {
       <Routes>
         {/* Landing page at root — full screen, no navbar */}
         <Route path="/" element={<Landing />} />
+        
+        {/* Auth pages */}
+        <Route path="/login" element={<Login />} />
 
-        {/* App pages with shared navbar */}
-        <Route
-          path="/app/*"
-          element={
-            <div className="min-h-screen bg-warm">
-              <Navbar />
-              <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 md:pt-8 pb-8">
+        {/* Protected App pages with shared navbar */}
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/app/*"
+            element={
+              <div className="min-h-screen bg-warm">
+                <Navbar />
+                <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 md:pt-8 pb-8">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/budgets" element={<Budgets />} />
@@ -48,9 +54,10 @@ export default function App() {
                   },
                 }}
               />
-            </div>
-          }
-        />
+              </div>
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
