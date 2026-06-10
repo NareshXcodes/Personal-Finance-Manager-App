@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { ScanEye, LayoutDashboard, PiggyBank, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, PiggyBank, BarChart3 } from 'lucide-react';
+import Logo from '@/components/shared-assets/Logo';
 
 const links = [
   { to: '/app/', label: 'Dashboard', icon: LayoutDashboard },
@@ -15,9 +16,7 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <NavLink to="/app/" className="flex items-center gap-2.5 group">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-brand glow-brand-sm transition-all group-hover:scale-105">
-                <ScanEye className="h-5 w-5 text-white" />
-              </div>
+              <Logo className="w-8 h-8 transition-transform group-hover:scale-105" />
               <span className="text-xl font-bold tracking-tight text-white">
                 Fin<span className="text-brand-light">sight</span>
               </span>

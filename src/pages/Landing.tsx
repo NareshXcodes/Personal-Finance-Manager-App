@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Shield, Activity, PieChart, ArrowRight } from 'lucide-react';
+import Logo from '../components/shared-assets/Logo';
 
 import { CreditCard } from '../components/shared-assets/credit-card/credit-card';
 
@@ -130,7 +131,12 @@ export default function Landing() {
 
       {/* Navigation (Ultra Minimal) */}
       <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-50 pointer-events-none">
-        <div className="text-xl font-medium tracking-widest uppercase pointer-events-auto">Finsight.</div>
+        <div className="flex items-center gap-2 pointer-events-auto">
+          <Logo className="w-8 h-8" />
+          <span className="text-xl font-bold tracking-tight text-white">
+            Fin<span className="text-[#2DD4BF]">sight</span>
+          </span>
+        </div>
         <Link to="/app/" className="text-sm font-medium tracking-wide hover:text-[#2563EB] transition-colors pointer-events-auto">
           Log in
         </Link>
