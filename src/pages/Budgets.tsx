@@ -89,14 +89,14 @@ export default function Budgets() {
   return (
     <div className="py-8 space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 animate-fade-in">
         <div>
-          <h1 className="text-3xl font-bold text-dark tracking-tight">Budgets</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-dark tracking-tight">Budgets</h1>
           <p className="text-sm text-dark-panel/50 mt-1">Manage your monthly budget allocations</p>
         </div>
         <button
           onClick={handleAdd}
-          className="flex items-center gap-2 gradient-brand rounded-xl px-5 py-2.5 text-sm font-bold text-white hover:opacity-90 transition-all glow-brand-sm"
+          className="flex items-center justify-center gap-2 gradient-brand rounded-xl px-5 py-2.5 text-sm font-bold text-white hover:opacity-90 transition-all glow-brand-sm w-full sm:w-auto"
         >
           <Plus className="h-4 w-4" /> New Budget
         </button>
@@ -132,7 +132,7 @@ export default function Budgets() {
               <div
                 key={budget.id}
                 onClick={() => navigate(`/budgets/${budget.id}`)}
-                className={`animate-slide-up stagger-${Math.min(i + 1, 6)} group cursor-pointer rounded-2xl border border-warm-border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/20 relative overflow-hidden`}
+                className={`animate-slide-up stagger-${Math.min(i + 1, 6)} group cursor-pointer rounded-2xl border border-warm-border bg-white p-5 md:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-brand/20 relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-brand/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3 group-hover:bg-brand/10 transition-all" />
                 <div className="relative">

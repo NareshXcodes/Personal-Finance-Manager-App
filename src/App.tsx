@@ -20,7 +20,7 @@ export default function App() {
           element={
             <div className="min-h-screen bg-warm">
               <Navbar />
-              <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 md:pt-8 pb-8">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/budgets" element={<Budgets />} />

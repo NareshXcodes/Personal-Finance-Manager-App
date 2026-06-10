@@ -129,7 +129,7 @@ export default function Landing() {
       <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-50 mix-blend-overlay"></div>
 
       {/* Navigation (Ultra Minimal) */}
-      <nav className="fixed top-0 left-0 w-full p-8 md:p-12 flex justify-between items-center z-50 pointer-events-none">
+      <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-50 pointer-events-none">
         <div className="text-xl font-medium tracking-widest uppercase pointer-events-auto">Finsight.</div>
         <Link to="/app/" className="text-sm font-medium tracking-wide hover:text-[#2563EB] transition-colors pointer-events-auto">
           Log in
@@ -150,7 +150,7 @@ export default function Landing() {
             style={{ opacity: heroOpacity, y: heroY }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 max-w-5xl mx-auto px-6 pointer-events-none"
           >
-            <h1 className="text-6xl md:text-8xl lg:text-[120px] font-medium leading-[0.9] tracking-tighter mb-8">
+            <h1 className="text-5xl md:text-8xl lg:text-[120px] font-medium leading-[0.9] tracking-tighter mb-8">
               Master your <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#A1A1AA]">
                 financial life.
@@ -232,12 +232,12 @@ export default function Landing() {
             style={{ opacity: ctaOpacity, y: ctaY }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center z-40 pointer-events-none"
           >
-            <h2 className="text-5xl md:text-8xl font-medium tracking-tight mb-16 max-w-4xl px-4 text-[#FAFAFA]">
+            <h2 className="text-4xl md:text-8xl font-medium tracking-tight mb-16 max-w-4xl px-4 text-[#FAFAFA]">
               Begin your journey.
             </h2>
             <Link
               to="/app/"
-              className="group pointer-events-auto relative inline-flex items-center justify-center px-10 md:px-12 py-5 md:py-6 bg-white text-[#09090B] rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95"
+              className="group pointer-events-auto relative inline-flex items-center justify-center px-8 md:px-12 py-4 md:py-6 bg-white text-[#09090B] rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95"
             >
               <span className="relative z-10 flex items-center gap-4 font-medium text-lg tracking-wide">
                 Launch Application <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

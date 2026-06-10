@@ -107,8 +107,8 @@ export default function Dashboard() {
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
         <div className="relative">
           <p className="text-white/60 text-sm font-medium uppercase tracking-widest">Total Spent This Month</p>
-          <h1 className="font-jetbrains text-5xl font-bold text-white mt-3 tracking-tight">
-            {loading ? <Skeleton className="h-14 w-48 inline-block" /> : formatCurrency(totalSpent)}
+          <h1 className="font-jetbrains text-4xl md:text-5xl font-bold text-white mt-3 tracking-tight">
+            {loading ? <Skeleton className="h-12 md:h-14 w-48 inline-block" /> : formatCurrency(totalSpent)}
           </h1>
           <p className="text-white/40 mt-2 text-sm">
             {thisMonthExpenses.length} transaction{thisMonthExpenses.length !== 1 ? 's' : ''} across {budgets.length} budget{budgets.length !== 1 ? 's' : ''}
@@ -156,8 +156,8 @@ export default function Dashboard() {
               <tr className="border-b border-warm-border bg-warm/50">
                 <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Title</th>
                 <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Amount</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Category</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Date</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50 hidden sm:table-cell">Category</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50 hidden md:table-cell">Date</th>
                 <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Actions</th>
               </tr>
             </thead>
@@ -186,8 +186,8 @@ export default function Dashboard() {
                   >
                     <td className="px-5 py-4 text-sm font-medium text-dark">{expense.title}</td>
                     <td className="px-5 py-4 text-sm font-jetbrains font-semibold text-dark">{formatCurrency(expense.amount)}</td>
-                    <td className="px-5 py-4"><CategoryBadge category={expense.category} /></td>
-                    <td className="px-5 py-4 text-sm text-dark-panel/50 font-jetbrains">{formatDate(expense.created_at)}</td>
+                    <td className="px-5 py-4 hidden sm:table-cell"><CategoryBadge category={expense.category} /></td>
+                    <td className="px-5 py-4 text-sm text-dark-panel/50 font-jetbrains hidden md:table-cell">{formatDate(expense.created_at)}</td>
                     <td className="px-5 py-4 text-right">
                       <div className="flex items-center justify-end gap-1">
                         <button

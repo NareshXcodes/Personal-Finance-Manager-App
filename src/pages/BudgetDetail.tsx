@@ -149,23 +149,23 @@ export default function BudgetDetail() {
   return (
     <div className="py-8 space-y-8">
       {/* Back + Actions */}
-      <div className="flex items-center justify-between animate-fade-in">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-in">
         <button
           onClick={() => navigate('/budgets')}
-          className="flex items-center gap-2 text-sm font-medium text-dark-panel/50 hover:text-brand transition-colors"
+          className="flex items-center gap-2 text-sm font-medium text-dark-panel/50 hover:text-brand transition-colors w-fit"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Budgets
         </button>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto grid grid-cols-2 sm:flex">
           <button
             onClick={() => setEditBudgetOpen(true)}
-            className="flex items-center gap-1.5 rounded-xl border border-warm-border px-4 py-2 text-sm font-semibold text-dark-panel/60 hover:border-brand/30 hover:text-brand transition-all"
+            className="flex items-center justify-center gap-1.5 rounded-xl border border-warm-border px-4 py-2 text-sm font-semibold text-dark-panel/60 hover:border-brand/30 hover:text-brand transition-all"
           >
             <Pencil className="h-3.5 w-3.5" /> Edit
           </button>
           <button
             onClick={() => setDeleteBudgetOpen(true)}
-            className="flex items-center gap-1.5 rounded-xl border border-danger/20 px-4 py-2 text-sm font-semibold text-danger/60 hover:border-danger/40 hover:text-danger transition-all"
+            className="flex items-center justify-center gap-1.5 rounded-xl border border-danger/20 px-4 py-2 text-sm font-semibold text-danger/60 hover:border-danger/40 hover:text-danger transition-all"
           >
             <Trash2 className="h-3.5 w-3.5" /> Delete
           </button>
@@ -177,7 +177,7 @@ export default function BudgetDetail() {
         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-light/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="relative">
           <CategoryBadge category={budget.category} size="md" />
-          <h1 className="text-4xl font-bold text-white mt-3 tracking-tight">{budget.name}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mt-3 tracking-tight">{budget.name}</h1>
           <div className="mt-6 flex items-end gap-3">
             <div className="flex-1">
               <div className="flex items-center justify-between text-xs text-white/40 mb-2">
@@ -215,8 +215,8 @@ export default function BudgetDetail() {
               <tr className="border-b border-warm-border bg-warm/50">
                 <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Title</th>
                 <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Amount</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Category</th>
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Date</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50 hidden sm:table-cell">Category</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50 hidden md:table-cell">Date</th>
                 <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Actions</th>
               </tr>
             </thead>
@@ -233,8 +233,8 @@ export default function BudgetDetail() {
                   <tr key={exp.id} className="hover:bg-brand/[0.03] transition-colors">
                     <td className="px-5 py-4 text-sm font-medium text-dark">{exp.title}</td>
                     <td className="px-5 py-4 text-sm font-jetbrains font-semibold text-dark">{formatCurrency(exp.amount)}</td>
-                    <td className="px-5 py-4"><CategoryBadge category={exp.category} /></td>
-                    <td className="px-5 py-4 text-sm text-dark-panel/50 font-jetbrains">{formatDate(exp.created_at)}</td>
+                    <td className="px-5 py-4 hidden sm:table-cell"><CategoryBadge category={exp.category} /></td>
+                    <td className="px-5 py-4 text-sm text-dark-panel/50 font-jetbrains hidden md:table-cell">{formatDate(exp.created_at)}</td>
                     <td className="px-5 py-4 text-right">
                       <div className="flex items-center justify-end gap-1">
                         <button

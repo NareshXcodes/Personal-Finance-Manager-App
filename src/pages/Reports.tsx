@@ -47,7 +47,7 @@ export default function Reports() {
     <div className="py-8 space-y-8">
       {/* Header */}
       <div className="animate-fade-in">
-        <h1 className="text-3xl font-bold text-dark tracking-tight">Monthly Report</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-dark tracking-tight">Monthly Report</h1>
         <p className="text-sm text-dark-panel/50 mt-1">Breakdown of your spending by category</p>
       </div>
 
@@ -85,7 +85,7 @@ export default function Reports() {
           {/* Chart */}
           <div className="rounded-2xl border border-warm-border bg-white p-6 shadow-sm animate-slide-up stagger-2">
             <h2 className="font-bold text-dark mb-6">Spending by Category</h2>
-            <div className="h-80">
+            <div className="h-64 md:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={report} barCategoryGap="20%">
                   <CartesianGrid strokeDasharray="3 3" stroke="#E8E5DD" vertical={false} />
@@ -138,7 +138,7 @@ export default function Reports() {
                   <tr className="border-b border-warm-border bg-warm/50">
                     <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Category</th>
                     <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Total Spent</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50">% of Total</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-dark-panel/50 hidden sm:table-cell">% of Total</th>
                     <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-dark-panel/50">Status</th>
                   </tr>
                 </thead>
@@ -158,7 +158,7 @@ export default function Reports() {
                           </div>
                         </td>
                         <td className="px-6 py-4 font-jetbrains text-sm font-semibold text-dark">{formatCurrency(row.total)}</td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 hidden sm:table-cell">
                           <div className="flex items-center gap-3">
                             <div className="w-24 h-1.5 rounded-full bg-dark-panel/5">
                               <div className="h-1.5 rounded-full transition-all duration-700" style={{ width: `${Math.min(100, pct)}%`, backgroundColor: color }} />
