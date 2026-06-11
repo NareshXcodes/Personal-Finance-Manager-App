@@ -8,12 +8,19 @@ export const authApi = {
   },
 
   login: async (email: string, password: string): Promise<{ access_token: string; token_type: string }> => {
-    // Standard OAuth2 form data is often used, but we'll use JSON based on the request style, 
-    // or standard JSON. We'll use JSON for simplicity unless URL encoded is strictly required by the backend.
-    const response = await axiosInstance.post<{ access_token: string; token_type: string }>('/auth/login', {
-      email,
-      password,
-    });
+    const params = new URLSearchParams();
+    params.append('username', email);
+    params.append('password', password);
+
+    const response = await axiosInstance.post<{ access_token: string; token_type: string }>(
+      '/auth/login',
+      params,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
     return response.data;
   },
 };
