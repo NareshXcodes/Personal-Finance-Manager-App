@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { LogIn, Mail, Lock } from 'lucide-react';
+import { UserPlus, Mail, Lock } from 'lucide-react';
 import { authApi } from '@/api/authApi';
 import Logo from '@/components/shared-assets/Logo';
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -20,10 +20,9 @@ export default function Login() {
 
     setIsLoading(true);
     try {
-      const data = await authApi.login(email, password);
-      localStorage.setItem('token', data.access_token);
-      toast.success('Logged in successfully!');
-      navigate('/app/');
+      await authApi.register(email, password);
+      toast.success('Registration successful! Please log in.');
+      navigate('/login');
     } catch (error: any) {
       const message = error.response?.data?.detail || error.message || 'An error occurred';
       toast.error(message);
@@ -44,10 +43,10 @@ export default function Login() {
               <Logo className="w-10 h-10" />
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
-              Welcome back
+              Create an account
             </h2>
             <p className="text-white/50 text-sm mt-2">
-              Enter your details to access your account
+              Sign up to start managing your finances
             </p>
           </div>
 
@@ -95,8 +94,8 @@ export default function Login() {
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
-                  <LogIn className="w-5 h-5" />
-                  Sign In
+                  <UserPlus className="w-5 h-5" />
+                  Sign Up
                 </>
               )}
             </button>
@@ -106,11 +105,11 @@ export default function Login() {
             <button
               type="button"
               onClick={() => {
-                navigate('/register');
+                navigate('/login');
               }}
               className="text-sm text-white/50 hover:text-white transition-colors"
             >
-              Don't have an account? Sign up
+              Already have an account? Sign in
             </button>
           </div>
         </div>

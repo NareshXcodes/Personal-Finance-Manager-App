@@ -7,6 +7,7 @@ import BudgetDetail from '@/pages/BudgetDetail';
 import Reports from '@/pages/Reports';
 import Landing from '@/pages/Landing';
 import Login from '@/pages/Login';
+import Register from '@/pages/Register';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
         
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* Protected App pages with shared navbar */}
         <Route element={<ProtectedRoute />}>
@@ -35,31 +36,31 @@ export default function App() {
                   <Route path="/reports" element={<Reports />} />
                 </Routes>
               </main>
-              <Toaster
-                position="bottom-right"
-                toastOptions={{
-                  duration: 3000,
-                  style: {
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    borderRadius: '12px',
-                    border: '1px solid #E8E5DD',
-                    padding: '12px 16px',
-                    fontSize: '14px',
-                    fontWeight: 500,
-                  },
-                  success: {
-                    iconTheme: { primary: '#0D9488', secondary: '#fff' },
-                  },
-                  error: {
-                    iconTheme: { primary: '#EF4444', secondary: '#fff' },
-                  },
-                }}
-              />
               </div>
             }
           />
         </Route>
       </Routes>
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            fontFamily: "'Space Grotesk', sans-serif",
+            borderRadius: '12px',
+            border: '1px solid #E8E5DD',
+            padding: '12px 16px',
+            fontSize: '14px',
+            fontWeight: 500,
+          },
+          success: {
+            iconTheme: { primary: '#0D9488', secondary: '#fff' },
+          },
+          error: {
+            iconTheme: { primary: '#EF4444', secondary: '#fff' },
+          },
+        }}
+      />
     </BrowserRouter>
   );
 }
