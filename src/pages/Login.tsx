@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { LogIn, UserPlus, Mail, Lock } from 'lucide-react';
 import { authApi } from '@/api/authApi';
 import Logo from '@/components/shared-assets/Logo';
 
 export default function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation();
+  const isLogin = location.pathname !== '/register';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,7 @@ export default function Login() {
       } else {
         await authApi.register(email, password);
         toast.success('Registration successful! Please log in.');
-        setIsLogin(true);
+        navigate('/login');
         // Clear password on switch
         setPassword('');
       }
@@ -120,7 +121,7 @@ export default function Login() {
             <button
               type="button"
               onClick={() => {
-                setIsLogin(!isLogin);
+                navigate(isLogin ? '/register' : '/login');
                 setPassword('');
               }}
               className="text-sm text-white/50 hover:text-white transition-colors"

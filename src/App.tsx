@@ -18,6 +18,7 @@ export default function App() {
         
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Login />} />
 
         {/* Protected App pages with shared navbar */}
         <Route element={<ProtectedRoute />}>
