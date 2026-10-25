@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { LogIn, Mail, Lock } from 'lucide-react';
 import { authApi } from '@/api/authApi';
-import Logo from '@/components/shared-assets/Logo';
+import Logo from '@/components/shared-assets/logo.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -40,8 +40,12 @@ export default function Login() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-brand/20 blur-[60px] -z-10 transition-opacity duration-500 opacity-50 group-hover:opacity-100" />
           
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 glow-brand-sm">
-              <Logo className="w-10 h-10" />
+            <div className="w-[100px] h-[80px] mb-4 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 glow-brand-sm">
+              <img
+                src={Logo}
+                alt="Personal Finance Manager logo"
+                className="h-full w-full object-contain"
+              />
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
               Welcome back

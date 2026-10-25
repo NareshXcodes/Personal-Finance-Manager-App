@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Shield, Activity, PieChart, ArrowRight } from 'lucide-react';
-import Logo from '../components/shared-assets/Logo';
+import Logo from '../components/shared-assets/logo.png';
 
 import { CreditCard } from '../components/shared-assets/credit-card/credit-card';
 
@@ -132,7 +132,11 @@ export default function Landing() {
       {/* Navigation (Ultra Minimal) */}
       <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-50 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
-          <Logo className="w-8 h-8" />
+          <img
+            src={Logo}
+            alt="Personal Finance Manager logo"
+            className="h-[80px] w-[100px] object-contain"
+          />
           <span className="text-xl font-bold tracking-tight text-white">
             Fin<span className="text-[#2DD4BF]">sight</span>
           </span>

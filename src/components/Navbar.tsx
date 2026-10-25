@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, PiggyBank, BarChart3, LogOut } from 'lucide-react';
-import Logo from '@/components/shared-assets/Logo';
+import Logo from '@/components/shared-assets/logo.png';
 
 const links = [
   { to: '/app/', label: 'Dashboard', icon: LayoutDashboard },
@@ -23,7 +23,13 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <NavLink to="/app/" className="flex items-center gap-2.5 group">
-              <Logo className="w-8 h-8 transition-transform group-hover:scale-105" />
+              <span className="w-[100px] h-[80px] transition-transform group-hover:scale-105">
+                <img
+                  src={Logo}
+                  alt="Personal Finance Manager logo"
+                  className="h-full w-full object-contain"
+                />
+              </span>
               <span className="text-xl font-bold tracking-tight text-white">
                 Fin<span className="text-brand-light">sight</span>
               </span>
