@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { LogIn, Mail, Lock } from 'lucide-react';
 import { authApi } from '@/api/authApi';
-import Logo from '@/components/shared-assets/logo.png';
+import Logo from '@/components/shared-assets/logo.jpg';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -33,24 +33,17 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-warm flex items-center justify-center p-4">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#F7F8F5] p-5 sm:p-8">
+      <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(circle_at_78%_0%,rgba(45,212,191,0.2),transparent_38%),linear-gradient(180deg,#f4fbf8_0%,#f7f8f5_78%)]" />
       <div className="w-full max-w-md animate-scale-in">
-        <div className="dark-panel rounded-3xl p-8 shadow-2xl noise-bg border border-white/5 relative overflow-hidden group">
-          {/* Decorative glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-brand/20 blur-[60px] -z-10 transition-opacity duration-500 opacity-50 group-hover:opacity-100" />
-          
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-[100px] h-[80px] mb-4 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 glow-brand-sm">
-              <img
-                src={Logo}
-                alt="Personal Finance Manager logo"
-                className="h-full w-full object-contain"
-              />
-            </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">
-              Welcome back
+        <div className="relative rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_24px_70px_rgba(15,118,110,0.12)] sm:p-9">
+          <div className="mb-8 flex flex-col items-center text-center">
+            <img src={Logo} alt="Personal Finance Manager logo" className="mb-6 h-auto w-64 max-w-full object-contain" />
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-dark">Welcome back</p>
+            <h2 className="text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+              Your finances, ready when you are
             </h2>
-            <p className="text-white/50 text-sm mt-2">
+            <p className="mt-3 text-sm leading-6 text-slate-500">
               Enter your details to access your account
             </p>
           </div>
@@ -58,32 +51,32 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-1.5 ml-1">Email</label>
+                <label className="mb-1.5 ml-1 block text-sm font-semibold text-slate-700">Email</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-white/40" />
+                    <Mail className="h-5 w-5 text-slate-400" />
                   </div>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
+                    className="block w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-slate-900 placeholder-slate-400 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand"
                     placeholder="you@example.com"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-1.5 ml-1">Password</label>
+                <label className="mb-1.5 ml-1 block text-sm font-semibold text-slate-700">Password</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-white/40" />
+                    <Lock className="h-5 w-5 text-slate-400" />
                   </div>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
+                    className="block w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-slate-900 placeholder-slate-400 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand"
                     placeholder="••••••••"
                   />
                 </div>
@@ -93,7 +86,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 gradient-brand text-white py-3.5 px-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-[0_0_20px_rgba(13,148,136,0.4)] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3.5 font-semibold text-white shadow-lg shadow-brand/20 transition-all duration-200 hover:bg-brand-dark hover:shadow-[0_0_20px_rgba(13,148,136,0.25)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -112,7 +105,7 @@ export default function Login() {
               onClick={() => {
                 navigate('/register');
               }}
-              className="text-sm text-white/50 hover:text-white transition-colors"
+              className="text-sm font-medium text-slate-500 transition-colors hover:text-brand-dark"
             >
               Don't have an account? Sign up
             </button>

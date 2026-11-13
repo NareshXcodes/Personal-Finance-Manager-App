@@ -1,266 +1,177 @@
-import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Shield, Activity, PieChart, ArrowRight } from 'lucide-react';
-import Logo from '../components/shared-assets/logo.png';
+import {
+  ArrowRight,
+  BarChart3,
+  Check,
+  ChevronRight,
+  CircleDollarSign,
+  ShieldCheck,
+  Sparkles,
+  WalletCards,
+} from 'lucide-react';
+import Logo from '../components/shared-assets/logo.jpg';
 
-import { CreditCard } from '../components/shared-assets/credit-card/credit-card';
-
-/* ------------------------------------------------------------------ */
-/*  Features Data                                                      */
-/* ------------------------------------------------------------------ */
 const features = [
   {
-    icon: <Shield strokeWidth={1} className="w-8 h-8" />,
-    title: 'Bank-grade Security',
-    description: 'Your financial data is encrypted and protected with enterprise-level security protocols. Total peace of mind.',
+    icon: WalletCards,
+    title: 'One calm view',
+    description: 'Bring spending, budgets, and balances together in a dashboard that is easy to understand.',
   },
   {
-    icon: <Activity strokeWidth={1} className="w-8 h-8" />,
-    title: 'Real-time Tracking',
-    description: 'Every transaction is instantly categorized. Monitor your cash flow down to the precise millisecond.',
+    icon: BarChart3,
+    title: 'Useful insights',
+    description: 'See where your money goes and spot patterns before they become expensive habits.',
   },
   {
-    icon: <PieChart strokeWidth={1} className="w-8 h-8" />,
-    title: 'Intelligent Insights',
-    description: 'Predictive analytics algorithms that forecast your financial trajectory and highlight savings opportunities.',
+    icon: ShieldCheck,
+    title: 'Private by default',
+    description: 'Your financial workspace is protected so you can focus on making confident decisions.',
   },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  Sleek Custom Cursor                                                */
-/* ------------------------------------------------------------------ */
-function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+const transactions = [
+  { label: 'Monthly income', value: '+$5,240.00', color: 'text-emerald-500' },
+  { label: 'Home & utilities', value: '-$1,240.00', color: 'text-slate-700' },
+  { label: 'Food & dining', value: '-$468.20', color: 'text-slate-700' },
+];
 
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName.toLowerCase() === 'a' || target.closest('a') || target.closest('button')) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mouseover', handleMouseOver);
-
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', handleMouseOver);
-    };
-  }, []);
-
-  return (
-    <motion.div
-      className="fixed top-0 left-0 w-4 h-4 rounded-full pointer-events-none z-[100] mix-blend-difference bg-white hidden md:block"
-      animate={{
-        x: mousePosition.x - 8,
-        y: mousePosition.y - 8,
-        scale: isHovering ? 4 : 1,
-        opacity: isHovering ? 0.5 : 1
-      }}
-      transition={{ type: 'tween', ease: 'backOut', duration: 0.15 }}
-    />
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Landing Page Masterpiece (Awwwards 3D Scroll Sequence)             */
-/* ------------------------------------------------------------------ */
 export default function Landing() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Track scroll over the entire 600vh container
-  const { scrollYProgress } = useScroll({ 
-    target: containerRef, 
-    offset: ["start start", "end end"] 
-  });
-  
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 40, damping: 20, restDelta: 0.001 });
-
-  // 1. Hero Animations (0 to 0.15)
-  const heroOpacity = useTransform(smoothProgress, [0, 0.12], [1, 0]);
-  const heroY = useTransform(smoothProgress, [0, 0.12], [0, -100]);
-
-  // 2. The 3D Credit Card Cinematic Journey
-  // It starts low and tilted like a dramatic camera angle, rises to center, 
-  // sweeps left and right to reveal features, and finally sinks for the CTA.
-  const cardScale = useTransform(smoothProgress, [0, 0.15, 0.4, 0.6, 0.8, 1], [0.5, 1.1, 0.9, 0.9, 1.1, 0.4]);
-  
-  // X movement to make room for text on desktop
-  const cardX = useTransform(smoothProgress, 
-    [0, 0.15, 0.3, 0.5, 0.7, 0.9], 
-    ['0%', '0%', '25vw', '-25vw', '25vw', '0%']
-  );
-  
-  const cardY = useTransform(smoothProgress, [0, 0.15, 0.8, 1], ['40vh', '0vh', '0vh', '-10vh']);
-  
-  // Complex multi-axis 3D rotation (Different camera angles)
-  const cardRotateX = useTransform(smoothProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [60, 5, -15, 15, 0, 50]);
-  const cardRotateY = useTransform(smoothProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0, 15, -25, 25, -15, 0]);
-  const cardRotateZ = useTransform(smoothProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [-30, -5, 10, -10, 5, -30]);
-
-  // 3. Feature 1 Reveals (Left Side) - Active ~ 0.2 to 0.4
-  const f1Opacity = useTransform(smoothProgress, [0.15, 0.25, 0.35, 0.45], [0, 1, 1, 0]);
-  const f1Y = useTransform(smoothProgress, [0.15, 0.25, 0.35, 0.45], [50, 0, 0, -50]);
-
-  // 4. Feature 2 Reveals (Right Side) - Active ~ 0.4 to 0.6
-  const f2Opacity = useTransform(smoothProgress, [0.35, 0.45, 0.55, 0.65], [0, 1, 1, 0]);
-  const f2Y = useTransform(smoothProgress, [0.35, 0.45, 0.55, 0.65], [50, 0, 0, -50]);
-
-  // 5. Feature 3 Reveals (Left Side) - Active ~ 0.6 to 0.8
-  const f3Opacity = useTransform(smoothProgress, [0.55, 0.65, 0.75, 0.85], [0, 1, 1, 0]);
-  const f3Y = useTransform(smoothProgress, [0.55, 0.65, 0.75, 0.85], [50, 0, 0, -50]);
-
-  // 6. CTA Finale (0.85 to 1.0)
-  const ctaOpacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
-  const ctaY = useTransform(smoothProgress, [0.85, 0.95], [50, 0]);
-
   return (
-    <div className="bg-[#09090B] text-[#FAFAFA] selection:bg-[#2563EB] selection:text-white font-sans">
-      <CustomCursor />
+    <main className="min-h-screen overflow-hidden bg-[#F7F8F5] text-slate-900">
+      <div className="absolute inset-x-0 top-0 -z-0 h-[680px] bg-[radial-gradient(circle_at_75%_5%,rgba(45,212,191,0.18),transparent_35%),linear-gradient(180deg,#f4fbf8_0%,#f7f8f5_74%)]" />
 
-      {/* Global subtle noise texture for premium feel */}
-      <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none z-50 mix-blend-overlay"></div>
-
-      {/* Navigation (Ultra Minimal) */}
-      <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-50 pointer-events-none">
-        <div className="flex items-center gap-2 pointer-events-auto">
-          <img
-            src={Logo}
-            alt="Personal Finance Manager logo"
-            className="h-[80px] w-[100px] object-contain"
-          />
-          <span className="text-xl font-bold tracking-tight text-white">
-            Fin<span className="text-[#2DD4BF]">sight</span>
-          </span>
-        </div>
-        <Link to="/app/" className="text-sm font-medium tracking-wide hover:text-[#2563EB] transition-colors pointer-events-auto">
-          Log in
+      <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
+        <Link to="/" className="flex items-center rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2">
+          <img src={Logo} alt="Personal Finance Manager home" className="h-auto w-56 max-w-[60vw] object-contain" />
         </Link>
+        <div className="flex items-center gap-3">
+          <Link to="/login" className="hidden rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-950 sm:block">
+            Sign in
+          </Link>
+          <Link
+            to="/register"
+            className="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 transition hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+          >
+            Get started
+          </Link>
+        </div>
       </nav>
 
-      {/* The 600vh Scroll Track that powers the entire sequence */}
-      <div ref={containerRef} className="relative h-[600vh]">
-        
-        {/* The Sticky Viewport (Acts as the camera lens) */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-
-          {/* Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#2563EB]/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
-
-          {/* 1. Hero Section */}
-          <motion.div 
-            style={{ opacity: heroOpacity, y: heroY }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 max-w-5xl mx-auto px-6 pointer-events-none"
-          >
-            <h1 className="text-5xl md:text-8xl lg:text-[120px] font-medium leading-[0.9] tracking-tighter mb-8">
-              Master your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#A1A1AA]">
-                financial life.
-              </span>
-            </h1>
-            <p className="text-xl md:text-3xl text-[#A1A1AA] font-light max-w-2xl mx-auto tracking-wide">
-              The definitive platform for modern wealth management.
-            </p>
-          </motion.div>
-
-          {/* 2. The 3D Credit Card Anchor */}
-          <motion.div
-            style={{
-              x: cardX,
-              y: cardY,
-              scale: cardScale,
-              rotateX: cardRotateX,
-              rotateY: cardRotateY,
-              rotateZ: cardRotateZ,
-              perspective: 2500,
-              transformStyle: "preserve-3d"
-            }}
-            className="absolute z-20 pointer-events-none"
-          >
-            <div className="absolute inset-0 bg-[#2563EB]/20 blur-[80px] rounded-[3rem] -z-10 translate-y-10 scale-90"></div>
-            <CreditCard
-              type="brand-dark"
-              company="Finsight Black"
-              cardNumber="4111 2222 3333 4444"
-              cardHolder="VIP MEMBER"
-              cardExpiration="12/30"
-              width={500}
-              className="shadow-[0_40px_80px_rgba(0,0,0,0.6)] rounded-2xl border border-white/10 backdrop-blur-md hidden md:block"
-            />
-            {/* Mobile Fallback */}
-            <CreditCard
-              type="brand-dark"
-              company="Finsight Black"
-              cardNumber="4111 2222 3333 4444"
-              cardHolder="VIP MEMBER"
-              cardExpiration="12/30"
-              width={320}
-              className="shadow-[0_40px_80px_rgba(0,0,0,0.6)] rounded-2xl border border-white/10 backdrop-blur-md block md:hidden"
-            />
-          </motion.div>
-
-          {/* 3. Feature 1 (Left Side) */}
-          <motion.div 
-            style={{ opacity: f1Opacity, y: f1Y }}
-            className="absolute left-[5%] md:left-[10%] top-[60%] md:top-1/2 -translate-y-1/2 w-[90%] md:w-[450px] z-30 pointer-events-none bg-[#09090B]/60 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none p-8 md:p-0 rounded-3xl border border-white/5 md:border-transparent"
-          >
-            <div className="text-[#A1A1AA] mb-6">{features[0].icon}</div>
-            <h3 className="text-3xl md:text-5xl font-light mb-4 text-[#FAFAFA] tracking-tight">{features[0].title}</h3>
-            <p className="text-lg md:text-xl text-[#A1A1AA] leading-relaxed font-light">{features[0].description}</p>
-          </motion.div>
-
-          {/* 4. Feature 2 (Right Side) */}
-          <motion.div 
-            style={{ opacity: f2Opacity, y: f2Y }}
-            className="absolute right-[5%] md:right-[10%] top-[60%] md:top-1/2 -translate-y-1/2 w-[90%] md:w-[450px] z-30 pointer-events-none md:text-right bg-[#09090B]/60 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none p-8 md:p-0 rounded-3xl border border-white/5 md:border-transparent"
-          >
-            <div className="text-[#A1A1AA] mb-6 flex md:justify-end">{features[1].icon}</div>
-            <h3 className="text-3xl md:text-5xl font-light mb-4 text-[#FAFAFA] tracking-tight">{features[1].title}</h3>
-            <p className="text-lg md:text-xl text-[#A1A1AA] leading-relaxed font-light">{features[1].description}</p>
-          </motion.div>
-
-          {/* 5. Feature 3 (Left Side) */}
-          <motion.div 
-            style={{ opacity: f3Opacity, y: f3Y }}
-            className="absolute left-[5%] md:left-[10%] top-[60%] md:top-1/2 -translate-y-1/2 w-[90%] md:w-[450px] z-30 pointer-events-none bg-[#09090B]/60 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none p-8 md:p-0 rounded-3xl border border-white/5 md:border-transparent"
-          >
-            <div className="text-[#A1A1AA] mb-6">{features[2].icon}</div>
-            <h3 className="text-3xl md:text-5xl font-light mb-4 text-[#FAFAFA] tracking-tight">{features[2].title}</h3>
-            <p className="text-lg md:text-xl text-[#A1A1AA] leading-relaxed font-light">{features[2].description}</p>
-          </motion.div>
-
-          {/* 6. Finale CTA */}
-          <motion.div 
-            style={{ opacity: ctaOpacity, y: ctaY }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center z-40 pointer-events-none"
-          >
-            <h2 className="text-4xl md:text-8xl font-medium tracking-tight mb-16 max-w-4xl px-4 text-[#FAFAFA]">
-              Begin your journey.
-            </h2>
+      <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:px-10 lg:pb-28 lg:pt-24">
+        <div className="max-w-xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-white/70 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-brand-dark shadow-sm">
+            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+            Make money feel simpler
+          </div>
+          <h1 className="text-5xl font-semibold leading-[1.04] tracking-[-0.055em] text-slate-950 sm:text-6xl lg:text-7xl">
+            Your money,
+            <span className="block text-brand">clearer.</span>
+          </h1>
+          <p className="mt-7 max-w-lg text-lg leading-8 text-slate-600 sm:text-xl">
+            Finsight gives you a focused, friendly way to track spending, plan budgets, and build better financial habits.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
-              to="/app/"
-              className="group pointer-events-auto relative inline-flex items-center justify-center px-8 md:px-12 py-4 md:py-6 bg-white text-[#09090B] rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95"
+              to="/register"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3.5 font-semibold text-white shadow-xl shadow-brand/20 transition hover:-translate-y-0.5 hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
             >
-              <span className="relative z-10 flex items-center gap-4 font-medium text-lg tracking-wide">
-                Launch Application <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-[#2563EB] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.25,0.1,0.25,1] z-0"></div>
-              <span className="absolute inset-0 z-10 flex items-center justify-center gap-4 font-medium text-lg tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                Launch Application <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              Start for free
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
-          </motion.div>
-
+            <a href="#features" className="inline-flex items-center justify-center gap-1 rounded-xl border border-slate-200 bg-white/70 px-6 py-3.5 font-semibold text-slate-700 transition hover:border-brand/40 hover:text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2">
+              Explore features
+              <ChevronRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-500">
+            {['No credit card', 'Private workspace', 'Built for real life'].map((item) => (
+              <span key={item} className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-brand" aria-hidden="true" />
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
+
+        <div className="relative mx-auto w-full max-w-[620px]" aria-label="Finsight dashboard preview">
+          <div className="absolute -inset-8 rounded-[3rem] bg-brand/10 blur-3xl" aria-hidden="true" />
+          <div className="relative rounded-[2rem] border border-white/80 bg-white/90 p-3 shadow-[0_30px_90px_rgba(15,118,110,0.18)] backdrop-blur sm:p-5">
+            <div className="rounded-[1.4rem] bg-slate-950 p-4 text-white sm:p-6">
+              <div className="mb-7 flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-medium text-white/50">Good morning, Naresh</p>
+                  <p className="mt-1 text-lg font-semibold">Your overview</p>
+                </div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/20 text-brand-light">
+                  <CircleDollarSign className="h-5 w-5" aria-hidden="true" />
+                </div>
+              </div>
+              <div className="rounded-2xl bg-gradient-to-br from-brand-dark to-brand p-5">
+                <p className="text-sm text-white/70">Available balance</p>
+                <p className="mt-2 text-3xl font-semibold tracking-tight">$8,420.80</p>
+                <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/20">
+                  <div className="h-full w-[72%] rounded-full bg-white" />
+                </div>
+                <div className="mt-2 flex justify-between text-xs text-white/65">
+                  <span>72% of monthly plan</span>
+                  <span>+12.4%</span>
+                </div>
+              </div>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {transactions.map((transaction) => (
+                  <div key={transaction.label} className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+                    <p className="text-[10px] leading-4 text-white/50">{transaction.label}</p>
+                    <p className={`mt-2 text-sm font-semibold ${transaction.color === 'text-emerald-500' ? 'text-emerald-300' : 'text-white'}`}>
+                      {transaction.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative border-y border-slate-200/80 bg-white/60 py-5">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-5 text-center text-sm font-medium text-slate-500 sm:justify-between sm:px-8 lg:px-10">
+          <span className="text-slate-400">A better rhythm for your finances</span>
+          <span>Track every expense</span>
+          <span>Plan with confidence</span>
+          <span>Grow your savings</span>
+        </div>
+      </section>
+
+      <section id="features" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <div className="max-w-2xl">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-dark">Everything in one place</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-5xl">Less spreadsheet. More progress.</h2>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {features.map(({ icon: Icon, title, description }) => (
+            <article key={title} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/5">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand-dark">
+                <Icon className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <h3 className="mt-6 text-xl font-semibold text-slate-950">{title}</h3>
+              <p className="mt-3 leading-7 text-slate-600">{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-5 mb-10 overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-14 text-center text-white sm:mx-8 sm:px-12 lg:mx-auto lg:max-w-7xl lg:py-20">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-light">Start with clarity</p>
+        <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-[-0.04em] sm:text-5xl">A healthier relationship with your money starts today.</h2>
+        <Link to="/register" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-semibold text-slate-950 transition hover:bg-brand-light focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950">
+          Create your free account
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
+      </section>
+
+      <footer className="mx-auto flex max-w-7xl flex-col gap-3 px-5 pb-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
+        <span>© {new Date().getFullYear()} Finsight</span>
+        <span>Simple tools for a clearer financial life.</span>
+      </footer>
+    </main>
   );
 }
