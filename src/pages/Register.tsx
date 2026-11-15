@@ -35,7 +35,7 @@ export default function Register() {
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#F7F8F5] p-5 sm:p-8">
       <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(circle_at_78%_0%,rgba(45,212,191,0.2),transparent_38%),linear-gradient(180deg,#f4fbf8_0%,#f7f8f5_0%,#f7f8f5_78%)]" />
       <div className="w-full max-w-md animate-scale-in">
-        <div className="relative rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-[0_24px_70px_rgba(15,118,110,0.12)] sm:rounded-[2rem] sm:p-9">
+        <div className="relative rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_24px_70px_rgba(15,118,110,0.12)] sm:rounded-4xl sm:p-9">
           <div className="mb-8 flex flex-col items-center text-center">
             <img src={Logo} alt="Personal Finance Manager logo" className="mb-5 h-auto w-48 max-w-[72vw] object-contain sm:mb-6 sm:w-56" />
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-dark">Start with clarity</p>

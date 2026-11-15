@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import {
   ArrowRight,
   BarChart3,
@@ -38,16 +38,16 @@ const transactions = [
 
 export default function Landing() {
   const shouldReduceMotion = useReducedMotion();
-  const reveal = shouldReduceMotion
+  const reveal: Variants = shouldReduceMotion
     ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
     : {
         hidden: { opacity: 0, y: 24 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } },
       };
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#F7F8F5] text-slate-900">
-      <div className="landing-ambient absolute inset-x-0 top-0 -z-0 h-[680px] bg-[radial-gradient(circle_at_75%_5%,rgba(45,212,191,0.18),transparent_35%),linear-gradient(180deg,#f4fbf8_0%,#f7f8f5_74%)]" />
+      <div className="landing-ambient absolute inset-x-0 top-0 z-0 h-[680px] bg-[radial-gradient(circle_at_75%_5%,rgba(45,212,191,0.18),transparent_35%),linear-gradient(180deg,#f4fbf8_0%,#f7f8f5_74%)]" />
 
       <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <Link to="/" className="flex items-center rounded-lg focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2">
@@ -119,7 +119,7 @@ export default function Landing() {
           transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="landing-glow absolute -inset-8 rounded-[3rem] bg-brand/10 blur-3xl" aria-hidden="true" />
-          <div className="landing-preview relative rounded-[2rem] border border-white/80 bg-white/90 p-3 shadow-[0_30px_90px_rgba(15,118,110,0.18)] backdrop-blur sm:p-5">
+          <div className="landing-preview relative rounded-4xl border border-white/80 bg-white/90 p-3 shadow-[0_30px_90px_rgba(15,118,110,0.18)] backdrop-blur sm:p-5">
             <div className="rounded-[1.4rem] bg-slate-950 p-4 text-white sm:p-6">
               <div className="mb-7 flex items-center justify-between">
                 <div>
@@ -130,7 +130,7 @@ export default function Landing() {
                   <CircleDollarSign className="h-5 w-5" aria-hidden="true" />
                 </div>
               </div>
-              <div className="rounded-2xl bg-gradient-to-br from-brand-dark to-brand p-5">
+              <div className="rounded-2xl bg-linear-to-br from-brand-dark to-brand p-5">
                 <p className="text-sm text-white/70">Available balance</p>
                 <p className="mt-2 text-3xl font-semibold tracking-tight">$8,420.80</p>
                 <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/20">
@@ -150,7 +150,7 @@ export default function Landing() {
                 {transactions.map((transaction, index) => (
                   <motion.div
                     key={transaction.label}
-                    className="rounded-xl border border-white/10 bg-white/[0.06] p-3"
+                    className="rounded-xl border border-white/10 bg-white/6 p-3"
                     initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
                     animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: 0.85 + index * 0.08 }}
@@ -208,7 +208,7 @@ export default function Landing() {
       </section>
 
       <motion.section
-        className="mx-5 mb-10 overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-14 text-center text-white sm:mx-8 sm:px-12 lg:mx-auto lg:max-w-7xl lg:py-20"
+        className="mx-5 mb-10 overflow-hidden rounded-4xl bg-slate-950 px-6 py-14 text-center text-white sm:mx-8 sm:px-12 lg:mx-auto lg:max-w-7xl lg:py-20"
         initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
         whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}

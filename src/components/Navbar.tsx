@@ -63,7 +63,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Top Dock */}
-      <div className="fixed left-2 right-2 top-[64px] z-40 md:hidden sm:left-4 sm:right-4 sm:top-[76px]">
+      <div className="fixed left-2 right-2 top-16 z-40 md:hidden sm:left-4 sm:right-4 sm:top-[76px]">
         <div className="dark-panel flex items-center justify-around rounded-2xl border border-white/10 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl noise-bg sm:p-2">
           {links.map(({ to, label, icon: Icon }) => (
             <NavLink
