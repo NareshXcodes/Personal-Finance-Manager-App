@@ -44,7 +44,7 @@ export default function BudgetForm({ initial, onSubmit, loading }: BudgetFormPro
               key={c.value}
               type="button"
               onClick={() => setCategory(c.value)}
-              className={`rounded-xl border px-3 py-2 text-sm font-medium transition-all ${
+              className={`min-h-11 rounded-xl border px-2 py-2 text-sm font-medium transition-all sm:px-3 ${
                 category === c.value
                   ? 'border-brand bg-brand/10 text-brand ring-2 ring-brand/20'
                   : 'border-warm-border bg-surface text-dark-panel/60 hover:border-brand/40'
@@ -73,7 +73,7 @@ export default function BudgetForm({ initial, onSubmit, loading }: BudgetFormPro
       <button
         type="submit"
         disabled={loading}
-        className="w-full gradient-brand rounded-xl px-4 py-3 text-sm font-bold text-white hover:opacity-90 transition-all disabled:opacity-50 glow-brand-sm mt-2"
+        className="mt-2 min-h-11 w-full rounded-xl px-4 py-3 text-sm font-bold text-white transition-all hover:opacity-90 disabled:opacity-50 gradient-brand glow-brand-sm"
       >
         {loading ? 'Saving...' : initial ? 'Update Budget' : 'Create Budget'}
       </button>

@@ -44,7 +44,7 @@ export default function Reports() {
   const avgSpend = report.length > 0 ? grandTotal / report.length : 0;
 
   return (
-    <div className="py-8 space-y-8">
+    <div className="space-y-6 py-5 sm:space-y-8 sm:py-8">
       {/* Header */}
       <div className="animate-fade-in">
         <h1 className="text-2xl md:text-3xl font-bold text-dark tracking-tight">Monthly Report</h1>
@@ -83,9 +83,9 @@ export default function Reports() {
           </div>
 
           {/* Chart */}
-          <div className="rounded-2xl border border-warm-border bg-white p-6 shadow-sm animate-slide-up stagger-2">
-            <h2 className="font-bold text-dark mb-6">Spending by Category</h2>
-            <div className="h-64 md:h-80">
+          <div className="rounded-2xl border border-warm-border bg-white p-4 shadow-sm animate-slide-up stagger-2 sm:p-6">
+            <h2 className="mb-5 font-bold text-dark sm:mb-6">Spending by Category</h2>
+            <div className="h-56 sm:h-64 md:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={report} barCategoryGap="20%">
                   <CartesianGrid strokeDasharray="3 3" stroke="#E8E5DD" vertical={false} />

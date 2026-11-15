@@ -21,12 +21,12 @@ export default function Navbar() {
       {/* Top Header */}
       <nav className="dark-panel sticky top-0 z-50 border-b border-white/5 noise-bg">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-14 items-center justify-between sm:h-16">
             <NavLink to="/app/" className="flex items-center group">
               <img
                 src={Logo}
                 alt="Personal Finance Manager home"
-                className="h-auto w-48 max-w-[52vw] object-contain transition-transform group-hover:scale-105"
+                className="h-10 w-auto max-w-[42vw] object-contain transition-transform group-hover:scale-105 sm:h-12 sm:max-w-none"
               />
             </NavLink>
 
@@ -63,31 +63,31 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Top Dock */}
-      <div className="md:hidden fixed top-[76px] left-4 right-4 z-40">
-        <div className="dark-panel border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl p-2 flex items-center justify-around noise-bg">
+      <div className="fixed left-2 right-2 top-[64px] z-40 md:hidden sm:left-4 sm:right-4 sm:top-[76px]">
+        <div className="dark-panel flex items-center justify-around rounded-2xl border border-white/10 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl noise-bg sm:p-2">
           {links.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
               end={to === '/app/'}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center gap-1 w-full py-2 rounded-xl transition-all duration-200 ${
+                `flex min-h-11 w-full flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 transition-all duration-200 sm:gap-1 sm:py-2 ${
                   isActive
                     ? 'text-brand-light bg-brand/15 shadow-[inset_0_0_12px_rgba(13,148,136,0.15)]'
                     : 'text-white/50 hover:text-white/80 hover:bg-white/5'
                 }`
               }
             >
-              <Icon className="h-5 w-5" />
-              <span className="text-[10px] font-semibold tracking-wide">{label}</span>
+              <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span className="text-[9px] font-semibold tracking-wide sm:text-[10px]">{label}</span>
             </NavLink>
           ))}
           <button
             onClick={handleLogout}
-            className="flex flex-col items-center justify-center gap-1 w-full py-2 rounded-xl text-white/50 hover:text-danger hover:bg-danger/10 transition-all duration-200"
+            className="flex min-h-11 w-full flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-white/50 transition-all duration-200 hover:bg-danger/10 hover:text-danger sm:gap-1 sm:py-2"
           >
-            <LogOut className="h-5 w-5" />
-            <span className="text-[10px] font-semibold tracking-wide">Logout</span>
+            <LogOut className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-[9px] font-semibold tracking-wide sm:text-[10px]">Logout</span>
           </button>
         </div>
       </div>

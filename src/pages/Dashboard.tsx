@@ -100,14 +100,14 @@ export default function Dashboard() {
   const categories: FilterOption[] = [ALL_CATEGORIES, ...CATEGORY_VALUES];
 
   return (
-    <div className="py-8 space-y-8">
+    <div className="space-y-6 py-5 sm:space-y-8 sm:py-8">
       {/* Hero */}
-      <div className="gradient-hero rounded-3xl p-8 noise-bg relative overflow-hidden animate-fade-in">
+      <div className="gradient-hero relative overflow-hidden rounded-3xl p-5 noise-bg animate-fade-in sm:p-8">
         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-light/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
         <div className="relative">
           <p className="text-white/60 text-sm font-medium uppercase tracking-widest">Total Spent This Month</p>
-          <h1 className="font-jetbrains text-4xl md:text-5xl font-bold text-white mt-3 tracking-tight">
+          <h1 className="mt-3 font-jetbrains text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
             {loading ? <Skeleton className="h-12 md:h-14 w-48 inline-block" /> : formatCurrency(totalSpent)}
           </h1>
           <p className="text-white/40 mt-2 text-sm">
@@ -116,7 +116,7 @@ export default function Dashboard() {
         </div>
         <button
           onClick={handleAdd}
-          className="mt-6 flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/20 transition-all glow-brand-sm"
+          className="mt-5 flex min-h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 sm:mt-6 sm:px-5 glow-brand-sm"
         >
           <Plus className="h-4 w-4" /> Add Expense
         </button>
@@ -137,7 +137,7 @@ export default function Dashboard() {
           <button
             key={cat}
             onClick={() => setFilter(cat)}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+            className={`min-h-9 shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-all sm:px-4 ${
               filter === cat
                 ? 'gradient-brand text-white glow-brand-sm'
                 : 'bg-white border border-warm-border text-dark-panel/60 hover:border-brand/30 hover:text-brand'

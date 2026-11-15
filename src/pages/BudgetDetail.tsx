@@ -175,7 +175,7 @@ export default function BudgetDetail() {
   const barColor = percent >= 90 ? 'from-red-500 to-red-400' : percent >= 70 ? 'from-amber-500 to-yellow-400' : 'from-brand-dark to-brand-light';
 
   return (
-    <div className="py-8 space-y-8">
+    <div className="space-y-6 py-5 sm:space-y-8 sm:py-8">
       {/* Back + Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-in">
         <button
@@ -187,13 +187,13 @@ export default function BudgetDetail() {
         <div className="flex gap-2 w-full sm:w-auto grid grid-cols-2 sm:flex">
           <button
             onClick={() => setEditBudgetOpen(true)}
-            className="flex items-center justify-center gap-1.5 rounded-xl border border-warm-border px-4 py-2 text-sm font-semibold text-dark-panel/60 hover:border-brand/30 hover:text-brand transition-all"
+            className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-warm-border px-3 py-2 text-sm font-semibold text-dark-panel/60 transition-all hover:border-brand/30 hover:text-brand sm:px-4"
           >
             <Pencil className="h-3.5 w-3.5" /> Edit
           </button>
           <button
             onClick={() => setDeleteBudgetOpen(true)}
-            className="flex items-center justify-center gap-1.5 rounded-xl border border-danger/20 px-4 py-2 text-sm font-semibold text-danger/60 hover:border-danger/40 hover:text-danger transition-all"
+            className="flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-danger/20 px-3 py-2 text-sm font-semibold text-danger/60 transition-all hover:border-danger/40 hover:text-danger sm:px-4"
           >
             <Trash2 className="h-3.5 w-3.5" /> Delete
           </button>
@@ -201,11 +201,11 @@ export default function BudgetDetail() {
       </div>
 
       {/* Hero */}
-      <div className="gradient-hero rounded-3xl p-8 noise-bg relative overflow-hidden animate-fade-in">
+      <div className="gradient-hero relative overflow-hidden rounded-3xl p-5 noise-bg animate-fade-in sm:p-8">
         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-light/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
         <div className="relative">
           <CategoryBadge category={budget.category} size="md" />
-          <h1 className="text-3xl md:text-4xl font-bold text-white mt-3 tracking-tight">{budget.name}</h1>
+          <h1 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">{budget.name}</h1>
           <div className="mt-6 flex items-end gap-3">
             <div className="flex-1">
               <div className="flex items-center justify-between text-xs text-white/40 mb-2">

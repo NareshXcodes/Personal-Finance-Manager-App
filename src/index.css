@@ -124,6 +124,29 @@
     animation: scaleIn 0.3s ease-out forwards;
   }
 
+  .landing-ambient {
+    animation: ambientDrift 16s ease-in-out infinite alternate;
+    transform-origin: 75% 5%;
+  }
+
+  .landing-glow {
+    animation: glowPulse 7s ease-in-out infinite;
+  }
+
+  .landing-preview {
+    will-change: transform;
+  }
+
+  @keyframes ambientDrift {
+    from { transform: scale(1) translate3d(0, 0, 0); }
+    to { transform: scale(1.04) translate3d(-1%, 1%, 0); }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.04); }
+  }
+
   .stagger-1 { animation-delay: 0.05s; }
   .stagger-2 { animation-delay: 0.1s; }
   .stagger-3 { animation-delay: 0.15s; }
@@ -145,6 +168,20 @@
     background-size: 200px 200px;
     pointer-events: none;
     border-radius: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-ambient,
+    .landing-glow,
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-scale-in {
+      animation: none;
+    }
+
+    .landing-preview {
+      will-change: auto;
+    }
   }
 }
 

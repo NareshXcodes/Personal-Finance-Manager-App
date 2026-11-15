@@ -84,7 +84,7 @@ export default function ExpenseForm({ budgets, initial, onSubmit, loading }: Exp
       <button
         type="submit"
         disabled={loading || !budgetId}
-        className="w-full gradient-brand rounded-xl px-4 py-3 text-sm font-bold text-white hover:opacity-90 transition-all disabled:opacity-50 glow-brand-sm mt-2"
+        className="mt-2 min-h-11 w-full rounded-xl px-4 py-3 text-sm font-bold text-white transition-all hover:opacity-90 disabled:opacity-50 gradient-brand glow-brand-sm"
       >
         {loading ? 'Saving...' : initial ? 'Update Expense' : 'Add Expense'}
       </button>

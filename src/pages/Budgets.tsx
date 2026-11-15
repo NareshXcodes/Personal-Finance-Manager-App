@@ -102,7 +102,7 @@ export default function Budgets() {
   };
 
   return (
-    <div className="py-8 space-y-8">
+    <div className="space-y-6 py-5 sm:space-y-8 sm:py-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 animate-fade-in">
         <div>
@@ -111,7 +111,7 @@ export default function Budgets() {
         </div>
         <button
           onClick={handleAdd}
-          className="flex items-center justify-center gap-2 gradient-brand rounded-xl px-5 py-2.5 text-sm font-bold text-white hover:opacity-90 transition-all glow-brand-sm w-full sm:w-auto"
+          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-all hover:opacity-90 sm:w-auto sm:px-5 gradient-brand glow-brand-sm"
         >
           <Plus className="h-4 w-4" /> New Budget
         </button>
